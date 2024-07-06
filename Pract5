@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Введіть довжину послідовності n: ");
+    scanf("%d", &n);
+
+    if (n <= 1 || n >= 10000) {
+        printf("Неправильне значення n. Воно має бути в діапазоні 1 < n < 10000.\n");
+        return 1;
+    }
+
+    int mod = 12345;
+    int a[n+1], b[n+1], c[n+1], d[n+1];
+
+    
+    a[1] = 2;
+    b[1] = 1;
+    c[1] = 1;
+    d[1] = 0;
+
+    
+    for (int i = 2; i <= n; i++) {
+        b[i] = a[i-1] % mod;
+        c[i] = b[i-1] % mod;
+        d[i] = c[i-1] % mod;
+        a[i] = (b[i] + c[i] + d[i]) % mod;
+    }
+
+    printf("Кількість шуканих послідовностей: %d\n", a[n] % mod);
+    return 0;
+}
